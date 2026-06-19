@@ -5,9 +5,9 @@ import { VINE_COLORS, VINE_COLOR_MAP } from '@/lib/gameData'
 
 // Vine anchors hanging from the tree branch at the top right of the canvas
 const VINE_ANCHORS = {
-  0: { x: 40, y: -90, restingH: 100 },
-  1: { x: 110, y: -80, restingH: 100 },
-  2: { x: 170, y: -70, restingH: 100 },
+  0: { x: 20, y: -90, restingH: 100 },
+  1: { x: 90, y: -80, restingH: 100 },
+  2: { x: 150, y: -70, restingH: 100 },
 }
 
 const SOCKET_LABELS = {

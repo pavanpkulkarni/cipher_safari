@@ -110,10 +110,10 @@ export default function AnimalStage({
             </div>
 
             {/* Main Animal Character Model */}
-            <div 
-              style={{ 
-                position: 'relative', 
-                width: isTarget ? `${targetSize}px` : `${decoySize}px`, 
+            <div
+              style={{
+                position: 'relative',
+                width: isTarget ? `${targetSize}px` : `${decoySize}px`,
                 height: isTarget ? `${targetSize}px` : `${decoySize}px`,
                 zIndex: 2 /* Layered above the shadow */
               }}

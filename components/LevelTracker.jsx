@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 
-export default function LevelTracker({ puzzles, currentIndex, completed, onRestart, onSelectLevel }) {
+export default function LevelTracker({ puzzles, currentIndex, completed, onRestart, onSelectLevel, onToggleHelp }) {
   return (
     <div
       style={{
@@ -155,6 +155,33 @@ export default function LevelTracker({ puzzles, currentIndex, completed, onResta
       >
         COMPLETED: {completed.length}/26
       </span>
+
+      {/* Help button */}
+      <motion.button
+        onClick={onToggleHelp}
+        whileHover={{ scale: 1.05, background: 'rgba(92, 73, 56, 0.15)' }}
+        whileTap={{ scale: 0.95 }}
+        style={{
+          flexShrink: 0,
+          marginLeft: '8px',
+          padding: '6px 12px',
+          borderRadius: '4px',
+          background: 'rgba(255, 255, 255, 0.25)',
+          border: '1px solid rgba(27, 23, 20, 0.4)',
+          color: '#1b1714',
+          fontFamily: 'Courier Prime, monospace',
+          fontSize: '11px',
+          fontWeight: '900',
+          cursor: 'pointer',
+          letterSpacing: '1px',
+          boxShadow: '0 0 8px rgba(0,0,0,0.1)',
+          transition: 'all 0.2s',
+          whiteSpace: 'nowrap',
+        }}
+        title="Show instructions on how to play"
+      >
+        📖 GUIDE
+      </motion.button>
 
       {/* Restart button */}
       <motion.button
