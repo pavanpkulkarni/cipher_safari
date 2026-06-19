@@ -1,0 +1,8 @@
+node_modules/
+.next/
+out/
+build/
+.env*.local
+safari_manifest.json
+.DS_Store
+.vercel

@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Outfit:wght@300;400;600;700&family=Courier+Prime:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ====== GOOGLE FONTS ====== */
+
+
+/* ====== GLOBAL RESET ====== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+/* ====== CRT SCANLINES EFFECT ====== */
+.crt-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+  animation: scanlines 8s linear infinite;
+}
+
+@keyframes scanlines {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100px; }
+}
+
+/* Glass distortion at screen edges */
+.crt-vignette {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.7) 100%);
+}
+
+/* ====== NEON GLOW UTILITIES ====== */
+.neon-red {
+  color: #FF2D55;
+  text-shadow: 0 0 8px #FF2D55, 0 0 20px #FF2D55;
+}
+.neon-blue {
+  color: #00C3FF;
+  text-shadow: 0 0 8px #00C3FF, 0 0 20px #00C3FF;
+}
+.neon-yellow {
+  color: #FFE500;
+  text-shadow: 0 0 8px #FFE500, 0 0 20px #FFE500;
+}
+.neon-amber {
+  color: #FF8C00;
+  text-shadow: 0 0 8px #FF8C00, 0 0 20px #FF8C00;
+}
+.neon-magenta {
+  color: #FF00CC;
+  text-shadow: 0 0 8px #FF00CC, 0 0 20px #FF00CC;
+}
+.neon-cyan {
+  color: #00FFF5;
+  text-shadow: 0 0 8px #00FFF5, 0 0 20px #00FFF5;
+}
+
+/* ====== NEON BORDER GLOWS ====== */
+.border-glow-red { box-shadow: 0 0 8px #FF2D55, inset 0 0 8px rgba(255,45,85,0.1); }
+.border-glow-blue { box-shadow: 0 0 8px #00C3FF, inset 0 0 8px rgba(0,195,255,0.1); }
+.border-glow-yellow { box-shadow: 0 0 8px #FFE500, inset 0 0 8px rgba(255,229,0,0.1); }
+.border-glow-amber { box-shadow: 0 0 8px #FF8C00, inset 0 0 8px rgba(255,140,0,0.1); }
+.border-glow-magenta { box-shadow: 0 0 8px #FF00CC, inset 0 0 8px rgba(255,0,204,0.1); }
+.border-glow-cyan { box-shadow: 0 0 8px #00FFF5, inset 0 0 8px rgba(0,255,245,0.1); }
+
+/* ====== GAME CONTAINER ====== */
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ====== SEASON BACKGROUND TRANSITION ====== */
+.season-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.8s ease-in-out;
+}
+
+/* ====== ROTOR DIAL ====== */
+.rotor-wrapper {
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.rotor-dial {
+  cursor: grab;
+  border-radius: 50%;
+}
+.rotor-dial:active {
+  cursor: grabbing;
+}
+
+/* ====== VINE STYLES ====== */
+.vine-cable {
+  position: absolute;
+  cursor: grab;
+  transition: filter 0.2s ease;
+  z-index: 50;
+}
+.vine-cable:active {
+  cursor: grabbing;
+}
+.vine-cable.connected {
+  cursor: default;
+}
+
+/* ====== SOCKET HOLE ====== */
+.socket-hole {
+  position: relative;
+  border-radius: 50%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.socket-hole.hovered {
+  transform: scale(1.15);
+}
+
+/* ====== ANIMAL CARD ====== */
+.animal-card {
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.5s ease;
+}
+.animal-card.bouncing {
+  animation: animalBounce 0.5s ease-in-out infinite alternate;
+}
+.animal-card.fading {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+@keyframes animalBounce {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-15px) scale(1.08); }
+}
+
+/* ====== LEVEL TRACKER ====== */
+.level-badge {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.level-badge.active {
+  transform: scale(1.25);
+}
+.level-badge.completed {
+  opacity: 0.6;
+}
+
+/* ====== LIMERICK BOX ====== */
+.limerick-box {
+  background: rgba(10, 6, 2, 0.85);
+  border: 2px solid rgba(255, 140, 0, 0.4);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+}
+
+/* ====== FEEDBACK FLASH ====== */
+.feedback-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  animation: slideDown 0.3s ease-out;
+  pointer-events: none;
+}
+
+/* ====== PARTICLE SPARKS ====== */
+.spark {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkFly 0.8s ease-out forwards;
+}
+
+@keyframes sparkFly {
+  0% { opacity: 1; transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0); }
+}
+
+/* ====== TITLE FLICKER ====== */
+.title-flicker {
+  animation: titleFlicker 5s ease-in-out infinite;
+}
+
+@keyframes titleFlicker {
+  0%, 95%, 100% { opacity: 1; }
+  97% { opacity: 0.7; }
+  98% { opacity: 1; }
+  99% { opacity: 0.5; }
+}
+
+/* ====== SUCCESS OVERLAY ====== */
+.success-banner {
+  background: linear-gradient(135deg, rgba(10,6,2,0.95), rgba(30,15,5,0.95));
+  border: 2px solid #FF8C00;
+  box-shadow: 0 0 30px rgba(255,140,0,0.5), 0 0 80px rgba(255,140,0,0.2);
+  animation: slideDown 0.4s ease-out;
+}
+
+/* ====== ERROR MESSAGE ====== */
+.error-shake {
+  animation: errorShake 0.5s ease-in-out;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+/* ====== PORTHOLE ====== */
+.porthole-frame {
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 30% 30%, rgba(80,60,30,0.8), rgba(30,20,5,0.95));
+  border: 6px solid #5c3d1a;
+  box-shadow: 
+    inset 0 0 30px rgba(0,0,0,0.8),
+    0 0 20px rgba(92,61,26,0.6),
+    4px 4px 8px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+/* ====== SCROLLBAR HIDING ====== */
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; }
+
+/* ====== WOOD TEXTURE PANEL ====== */
+.wood-panel {
+  background: 
+    linear-gradient(135deg, rgba(80,45,10,0.9) 0%, rgba(50,28,6,0.95) 100%);
+  border: 3px solid rgba(139,90,43,0.7);
+  box-shadow: 
+    inset 0 2px 4px rgba(255,200,100,0.1),
+    inset 0 -2px 4px rgba(0,0,0,0.5),
+    0 4px 20px rgba(0,0,0,0.5);
+}
+
+/* ====== STONE CONSOLE ====== */
+.stone-panel {
+  background: 
+    linear-gradient(135deg, rgba(40,40,50,0.95) 0%, rgba(20,20,28,0.98) 100%);
+  border: 2px solid rgba(80,80,100,0.5);
+  box-shadow: 
+    inset 0 2px 4px rgba(255,255,255,0.05),
+    inset 0 -2px 4px rgba(0,0,0,0.7),
+    0 6px 30px rgba(0,0,0,0.7);
+}
