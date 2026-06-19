@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🦁 Cipher Safari: The Changing Skies
 
-## Getting Started
+Welcome to **Cipher Safari: The Changing Skies**! 
+Play it live here: 🎮 **[https://ciphersafari.vercel.app/](https://ciphersafari.vercel.app/)**
 
-First, run the development server:
+This interactive web game teaches players about encryption, logical deduction, and problem-solving through the lens of a beautiful, animated Safari adventure. It is inspired by the legendary **Enigma Machine**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🔐 1. What is the Enigma Machine?
+
+The Enigma machine was a famous cipher device used heavily during World War II to protect military communication. It looked a bit like an oversized typewriter, but it was incredibly complex for its time. When a letter was typed into the keyboard, it would pass through a series of rotating wheels (called "rotors") and a plugboard, scrambling the letter before lighting up the encrypted output on a lampboard.
+
+Because the rotors moved after every single keypress, the encryption pathway constantly changed. Typing "A" three times in a row might output "P", then "X", then "L". It was considered mathematically unbreakable—until brilliant mathematicians and computer scientists like **Alan Turing** built machines to crack the code, changing the course of history!
+
+---
+
+## ⚙️ 2. How it Works
+
+Imagine you and your best friend have a secret code ring. If you set your ring to "3", A becomes D, B becomes E, etc. That's a simple cipher. 
+
+But what if your secret code ring *spins* slightly every time you write a letter? 
+
+That is exactly what the Enigma machine did! It used a system of mechanical **Rotors** (spinning wheels with wires inside) and a **Plugboard** (cables that swapped specific letters, like A with Z). 
+
+In our game, **Cipher Safari**:
+- The **Season Rotor** and **Shadow Rotor** act like the spinning wheels of the Enigma machine. By changing them, you are altering the "encryption key".
+- The **Vine Sockets** act like the Enigma's Plugboard. Connecting a colored vine to a specific socket completes the electrical circuit required to send the signal to the correct destination.
+
+If you don't have the exact combination of Rotors and Plugboard connections, the signal gets scrambled and the cipher remains locked!
+
+---
+
+## 🎮 3. How to Play This Game
+
+You are assisting Professor Alan Turing in deciphering the mysteries of the Safari! To unlock each animal habitat, you must configure your machine correctly based on the clues provided.
+
+1. **Read the Scroll**: On the left side of the screen, you will see a poetic riddle. Look carefully for clues indicating a **Season**, a **Time of Day** (shadows), and a **Color/Location**.
+2. **Set the Rotors**: Click and drag the **Season Rotor** (left dial) to match the season from the riddle. Then, set the **Shadow Rotor** (right dial) to the correct time of day.
+3. **Connect the Plugboard (Vines)**: Grab a colored vine cord from the tree branch on the right. Drag and plug it into the correct tree stump socket indicated by the riddle.
+4. **Unlock the Cipher**: If your dials and vine color match the secret combination perfectly, the encryption circuit will complete! The target animal will perform a happy dance, and you will unlock the next level!
+
+---
+
+## 🏗️ 4. Architecture Diagram
+
+The game is built using a modern React/Next.js stack, leveraging Framer Motion for fluid animations and a custom coordinate-scaling architecture to support fully responsive game canvases.
+
+```mermaid
+graph TD
+    User([Player]) --> Browser[Web Browser]
+    
+    subgraph "Next.js Application (Client-Side Rendered)"
+        Page[app/page.js<br>Main Game Controller]
+        
+        subgraph "UI Components"
+            LevelTracker[Level Tracker<br>Shows Progress]
+            LimerickBox[Limerick Box<br>Displays Riddles]
+            RotorConsole[Rotor Components<br>Dial Interactions]
+            AnimalStage[Animal Stage<br>Framer Motion Animations]
+            VineBoard[Vine Board<br>SVG Drag & Drop Physics]
+        end
+        
+        subgraph "State Management (React Hooks)"
+            GameState[(Game State)]
+            GameState -.-> |Current Level, Feedback| Page
+            GameState -.-> |Season, Time| RotorConsole
+            GameState -.-> |Drag Coordinates| VineBoard
+        end
+        
+        Page --> LevelTracker
+        Page --> LimerickBox
+        Page --> RotorConsole
+        Page --> AnimalStage
+        Page --> VineBoard
+    end
+    
+    Browser --> Page
+    
+    %% Interactions
+    VineBoard -.-> |Triggers validation| Page
+    RotorConsole -.-> |Updates State| GameState
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Tech Stack:
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/) for character movement and smooth transitions
+- **Drag & Drop**: Native React pointer events mapped to SVG coordinate spaces
+- **Deployment**: [Vercel](https://vercel.com/)
