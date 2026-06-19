@@ -202,7 +202,7 @@ export default function VineBoard({
     if (!puzzle) return []
     const decoyColors = VINE_COLORS.filter(c => c !== puzzle.required_vine_color).slice(0, 2)
     return [puzzle.required_vine_color, ...decoyColors].sort()
-  }, [puzzle?.id])
+  }, [puzzle])
 
   // Show 3 target sockets (correct + 2 decoys) sorted alphabetically
   const availableSockets = useMemo(() => {
@@ -212,7 +212,7 @@ export default function VineBoard({
     const decoy1 = candidates[0] || target
     const decoy2 = candidates[1] || target
     return [target, decoy1, decoy2].sort()
-  }, [puzzle?.id])
+  }, [puzzle])
 
   const getRelativeCoords = useCallback((e) => {
     if (!svgRef.current) return { x: 0, y: 0 }
@@ -294,7 +294,7 @@ export default function VineBoard({
       window.removeEventListener('touchmove', onMove)
       window.removeEventListener('touchend', onUp)
     }
-  }, [draggedColor, availableVines, availableSockets, onVineConnect, getRelativeCoords])
+  }, [draggedColor, availableVines, availableSockets, onVineConnect, getRelativeCoords, SOCKET_POSITIONS])
 
   // Get active coordinates of a vine tip
   const getTipCoords = useCallback((color, idx) => {
@@ -307,7 +307,7 @@ export default function VineBoard({
     }
     const anchor = VINE_ANCHORS[idx] || { x: 150, y: 30, restingH: 150 }
     return { x: anchor.x, y: anchor.y + anchor.restingH }
-  }, [draggedColor, dragPos, connectedSocket, selectedVine, availableSockets])
+  }, [draggedColor, dragPos, connectedSocket, selectedVine, availableSockets, SOCKET_POSITIONS])
 
   return (
     <div

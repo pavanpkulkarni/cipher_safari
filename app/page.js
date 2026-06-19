@@ -444,7 +444,7 @@ export default function GamePage() {
                   className="text-2xl font-black"
                   style={{ fontFamily: 'Cinzel, serif', color: '#FF2D55', textShadow: '0 0 15px #FF2D55' }}
                 >
-                  DON'T GIVE UP!
+                  DON&apos;T GIVE UP!
                 </p>
                 <p
                   className="text-lg mt-1"
