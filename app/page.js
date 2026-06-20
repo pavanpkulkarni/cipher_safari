@@ -257,7 +257,7 @@ export default function GamePage() {
         alignItems: 'center',
         justifyContent: 'center',
         width: '100vw',
-        height: '100vh',
+        height: '100dvh', // Changed from 100vh to 100dvh to fix iOS Safari landscape overlap bug
         overflow: 'hidden'
       }}
     >
