@@ -5,9 +5,9 @@ import { VINE_COLORS, VINE_COLOR_MAP } from '@/lib/gameData'
 
 // Vine anchors hanging from the tree branch at the top right of the canvas
 const VINE_ANCHORS = {
-  0: { x: 20, y: -90, restingH: 100 },
-  1: { x: 90, y: -80, restingH: 100 },
-  2: { x: 150, y: -70, restingH: 100 },
+  0: { x: 20, y: -90, restingH: 200 },
+  1: { x: 90, y: -80, restingH: 200 },
+  2: { x: 150, y: -70, restingH: 200 },
 }
 
 const SOCKET_LABELS = {
@@ -216,12 +216,22 @@ export default function VineBoard({
 
   const getRelativeCoords = useCallback((e) => {
     if (!svgRef.current) return { x: 0, y: 0 }
-    const rect = svgRef.current.getBoundingClientRect()
+    const svg = svgRef.current
     const clientX = e.clientX || e.touches?.[0]?.clientX || e.changedTouches?.[0]?.clientX || 0
     const clientY = e.clientY || e.touches?.[0]?.clientY || e.changedTouches?.[0]?.clientY || 0
+    
+    let point = svg.createSVGPoint()
+    point.x = clientX
+    point.y = clientY
+    
+    const ctm = svg.getScreenCTM()
+    if (ctm) {
+      point = point.matrixTransform(ctm.inverse())
+    }
+    
     return {
-      x: clientX - rect.left,
-      y: clientY - rect.top,
+      x: point.x,
+      y: point.y,
     }
   }, [])
 

@@ -102,6 +102,17 @@ export default function RotorWheel({ type, value, onChange, dialImage, disabled,
     if (!isDragging) return
     setIsDragging(false)
 
+    // Detect if this was a click (no significant movement)
+    if (Math.abs(rotation - dragStartRotation) < 2) {
+      playClickSound(isSeason ? 220 : 700, isSeason ? 0.12 : 0.04)
+      if (isSeason) {
+        onChange((value + 1) % 4)
+      } else {
+        onChange(value === 24 ? 1 : value + 1)
+      }
+      return
+    }
+
     // Snap to nearest step
     let norm = rotation % 360
     if (norm < 0) norm += 360
@@ -127,7 +138,7 @@ export default function RotorWheel({ type, value, onChange, dialImage, disabled,
       if (logicalHour > 24) logicalHour = logicalHour - 24
       onChange(logicalHour)
     }
-  }, [isDragging, rotation, stepDeg, steps, isSeason, onChange])
+  }, [isDragging, rotation, dragStartRotation, value, stepDeg, steps, isSeason, onChange])
 
   // Mouse events
   const handleMouseDown = (e) => {
