@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 export default function AnimalStage({
   puzzle,
@@ -24,12 +24,38 @@ export default function AnimalStage({
   const translateX = delta * 5 /* Shifts the base of the shadow horizontally */
   const scaleY = 0.25 + Math.abs(delta) * 0.035 /* Long shadow in early morning/late evening, short at noon */
 
-  // Position animals in a group
-  const animals = [
-    { name: decoy1, isTarget: false, xOffset: `-${gap}px`, scale: 0.75 },
-    { name: targetAnimal, isTarget: true, xOffset: '0px', scale: 1.0 },
-    { name: decoy2, isTarget: false, xOffset: `${gap}px`, scale: 0.75 },
-  ].filter(a => a.name)
+  // Position animals in a randomly shuffled group based on puzzle ID
+  const animals = useMemo(() => {
+    const raw = [
+      { name: targetAnimal, isTarget: true, scale: 1.0 },
+      { name: decoy1, isTarget: false, scale: 1.0 },
+      { name: decoy2, isTarget: false, scale: 1.0 },
+    ].filter(a => a.name)
+
+    const hashString = (str) => {
+      let hash = 0
+      for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash)
+      }
+      return hash
+    }
+
+    const shuffled = [...raw].sort((a, b) => {
+      const valA = Math.abs(hashString(a.name + (puzzle?.id || 0)))
+      const valB = Math.abs(hashString(b.name + (puzzle?.id || 0)))
+      return (valA % 100) - (valB % 100)
+    })
+
+    return shuffled.map((a, i) => {
+      let xOffset = '0px'
+      if (shuffled.length === 3) {
+        xOffset = i === 0 ? `-${gap}px` : i === 1 ? '0px' : `${gap}px`
+      } else if (shuffled.length === 2) {
+        xOffset = i === 0 ? `-${gap/2}px` : `${gap/2}px`
+      }
+      return { ...a, xOffset }
+    })
+  }, [puzzle?.id, targetAnimal, decoy1, decoy2, gap])
 
   return (
     <div

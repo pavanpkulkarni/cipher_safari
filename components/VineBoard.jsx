@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react'
-import { VINE_COLORS, VINE_COLOR_MAP } from '@/lib/gameData'
+import { VINE_COLORS, VINE_COLOR_MAP, DECOY_ANIMALS } from '@/lib/gameData'
 
 // Vine anchors hanging from the tree branch at the top right of the canvas
 const VINE_ANCHORS = {
@@ -208,9 +208,17 @@ export default function VineBoard({
   const availableSockets = useMemo(() => {
     if (!puzzle) return []
     const target = puzzle.target_nest_id
-    const candidates = Object.keys(SOCKET_LABELS).filter(k => k !== target)
-    const decoy1 = candidates[0] || target
-    const decoy2 = candidates[1] || target
+    const decoys = DECOY_ANIMALS[puzzle.id] || []
+    
+    const getSocket = (animal) => {
+      if (!animal) return target
+      const cap = animal.charAt(0).toUpperCase() + animal.slice(1)
+      return Object.keys(SOCKET_LABELS).find(k => k.startsWith(cap)) || target
+    }
+    
+    const decoy1 = getSocket(decoys[0])
+    const decoy2 = getSocket(decoys[1])
+    
     return [target, decoy1, decoy2].sort()
   }, [puzzle])
 
@@ -275,11 +283,12 @@ export default function VineBoard({
       stopCelloHum()
 
       let snappedSocketId = null
+      const SNAP_RADIUS = 80 // Increased to allow stretching easily into all sockets
       availableSockets.forEach((socketId, sIdx) => {
         const socketPos = SOCKET_POSITIONS[sIdx]
         if (!socketPos) return
         const dist = Math.hypot(coords.x - socketPos.x, coords.y - socketPos.y)
-        if (dist < 32) {
+        if (dist < SNAP_RADIUS) {
           snappedSocketId = socketId
         }
       })
@@ -338,7 +347,7 @@ export default function VineBoard({
       >
         <defs>
           {Object.entries(VINE_COLOR_MAP).map(([color, cfg]) => (
-            <filter key={color} id={`glow-${color}`} x="-50%" y="-50%" width="200%" height="200%">
+            <filter key={color} id={`glow-${color}`} x="-100%" y="-100%" width="300%" height="300%">
               <feGaussianBlur stdDeviation="5" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
