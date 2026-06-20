@@ -1,6 +1,6 @@
 # 🦁 Cipher Safari: The Changing Skies
 
-Welcome to **Cipher Safari: The Changing Skies**! 
+Welcome to **Cipher Safari: The Ultimate Kids' Enigma Cryptography Adventure**! 
 Play it live here: 🎮 **[https://ciphersafari.vercel.app/](https://ciphersafari.vercel.app/)**
 
 This interactive web game teaches players about encryption, logical deduction, and problem-solving through the lens of a beautiful, animated Safari adventure. It is inspired by the legendary **Enigma Machine**.
