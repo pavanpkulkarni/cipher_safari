@@ -22,14 +22,15 @@ export default function LimerickBox({ puzzle }) {
             key={i}
             style={{
               fontFamily: '"Georgia", "Cinzel", serif',
-              fontSize: '15px',
+              fontSize: '20px',   /* Increased base font size since CSS scale was removed */
               lineHeight: 1.45,
-              color: '#1c110a', // Dark, aged sepia-black matching the ink print style
+              color: '#0e0d0cff', // Dark, aged sepia-black matching the ink print style
               margin: 0,
-              fontWeight: '500',
+              fontWeight: '700',
               fontStyle: 'bold',
               letterSpacing: '0.2px',
               textShadow: '0.3px 0.3px 0.3px rgba(0, 0, 0, 0.15)',
+              paddingBottom: '10px', /* Ensure proper spacing between lines when wrapping occurs */
             }}
           >
             {line}

@@ -359,14 +359,14 @@ export default function GamePage() {
                 <div
                   className="flex flex-col items-start justify-end"
                   style={{
-                    width: '350px',         /* Locked width relative to 1920px canvas baseline */
+                    width: '500px',         /* Increased width to avoid heavy text wrapping */
                     flexShrink: 0,
-                    paddingBottom: '50px',  /* Locked bottom padding relative to 1080px height baseline */
-                    paddingLeft: '110px',    /* Locked left padding relative to 1920px width baseline */
+                    paddingBottom: '70px',  /* Increased bottom padding to lift text above the edge */
+                    paddingLeft: '150px',
                   }}
                 >
                   {/* Limerick */}
-                  <div style={{ transform: 'scale(1.5)', transformOrigin: 'bottom left' }}>
+                  <div>
                     <LimerickBox puzzle={currentPuzzle} seasonIndex={seasonIndex} />
                   </div>
                 </div>
