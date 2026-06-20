@@ -12,17 +12,17 @@ const playClickSound = (pitch = 800, duration = 0.03) => {
     const ctx = new AudioContext()
     const osc = ctx.createOscillator()
     const gain = ctx.createGain()
-    
+
     osc.type = 'triangle'
     osc.frequency.setValueAtTime(pitch, ctx.currentTime)
     osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + duration)
-    
+
     gain.gain.setValueAtTime(0.08, ctx.currentTime)
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration)
-    
+
     osc.connect(gain)
     gain.connect(ctx.destination)
-    
+
     osc.start()
     osc.stop(ctx.currentTime + duration)
   } catch (err) {
@@ -256,7 +256,7 @@ export default function RotorWheel({ type, value, onChange, dialImage, disabled,
       <div
         style={{
           fontFamily: 'Courier Prime, monospace',
-          fontSize: '11px',
+          fontSize: '20px',
           fontWeight: 'bold',
           color: accentColor,
           background: '#0a0a0a',

@@ -145,7 +145,7 @@ export default function LevelTracker({ puzzles, currentIndex, completed, onResta
       <span
         style={{
           fontFamily: 'Courier Prime, monospace',
-          fontSize: '12px',
+          fontSize: '20px',
           color: '#090909ff',
           whiteSpace: 'nowrap',
           flexShrink: 0,
@@ -170,7 +170,7 @@ export default function LevelTracker({ puzzles, currentIndex, completed, onResta
           border: '1px solid rgba(27, 23, 20, 0.4)',
           color: '#1b1714',
           fontFamily: 'Courier Prime, monospace',
-          fontSize: '11px',
+          fontSize: '20px',
           fontWeight: '900',
           cursor: 'pointer',
           letterSpacing: '1px',
@@ -197,7 +197,7 @@ export default function LevelTracker({ puzzles, currentIndex, completed, onResta
           border: '1px solid rgba(211, 195, 198, 0.4)',
           color: '#f10a30ff',
           fontFamily: 'Courier Prime, monospace',
-          fontSize: '11px',
+          fontSize: '20px',
           fontWeight: '900',
           cursor: 'pointer',
           letterSpacing: '1px',

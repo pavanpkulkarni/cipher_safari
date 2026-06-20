@@ -16,6 +16,44 @@ const SEASON_BACKGROUNDS = {
   3: '/seasons/winter.jpeg',
 }
 
+// Synthesize a happy ascending chime for success
+const playHurraySound = () => {
+  if (typeof window === 'undefined') return
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext
+    if (!AudioContext) return
+    const ctx = new AudioContext()
+
+    const playNote = (freq, startTime, duration) => {
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
+      osc.type = 'sine'
+      osc.frequency.setValueAtTime(freq, startTime)
+
+      gain.gain.setValueAtTime(0, startTime)
+      gain.gain.linearRampToValueAtTime(0.15, startTime + 0.05)
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration)
+
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+      osc.start(startTime)
+      osc.stop(startTime + duration)
+    }
+
+    const t = ctx.currentTime
+    playNote(440, t, 0.2)      // A4
+    playNote(554.37, t + 0.15, 0.2) // C#5
+    playNote(659.25, t + 0.3, 0.4) // E5
+    playNote(880, t + 0.45, 0.6)   // A5
+  } catch (err) {
+    console.warn('Audio synthesis failed:', err)
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.playHurraySound = playHurraySound
+}
+
 export default function GamePage() {
   const [currentLevelIndex, setCurrentLevelIndex] = useState(0)
   const [completedLevels, setCompletedLevels] = useState([])
@@ -143,6 +181,7 @@ export default function GamePage() {
         setAlanState('excited')
         spawnParticles()
         setTimeout(() => {
+          playHurraySound()
           setShowSuccessOverlay(true)
         }, 800)
         setTimeout(() => {
