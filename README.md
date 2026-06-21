@@ -1,4 +1,4 @@
-# 🦁 Cipher Safari: The Changing Skies
+# 🦁 Cipher Safari: The Ultimate Kids' Enigma Cryptography Adventure
 
 Welcome to **Cipher Safari: The Ultimate Kids' Enigma Cryptography Adventure**! 
 Play it live here: 🎮 **[https://ciphersafari.vercel.app/](https://ciphersafari.vercel.app/)**
